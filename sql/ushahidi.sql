@@ -63,7 +63,7 @@ PRIMARY KEY (`id`)
 -- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `job_category` (
+CREATE TABLE IF NOT EXISTS `j_category` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `parent_id` INT NOT NULL DEFAULT '0',
   `locale` varchar(10) NOT NULL default 'en_US',
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `job_category` (
 -- Dumping data for table `category`
 --
 
-INSERT INTO `job_category` (`id`, `job_category_type`, `job_category_title`, `job_category_description`, `job_category_color`, `job_category_visible`) VALUES
+INSERT INTO `j_category` (`id`, `job_category_type`, `job_category_title`, `job_category_description`, `job_category_color`, `job_category_visible`) VALUES
 (1, 5, 'PROGRAMMERS', 'PROGRAMMERS', '9900CC', 1),
 (2, 5, 'DESIGNERS', 'DESIGNERS', '3300FF', 1),
 (3, 5, 'BLOGGERS', 'BLOGGERS', '663300', 1),
@@ -95,7 +95,7 @@ INSERT INTO `job_category` (`id`, `job_category_type`, `job_category_title`, `jo
 -- Table structure for table `category_lang`
 --
 
-CREATE TABLE `job_category_lang`
+CREATE TABLE `j_category_lang`
 (
 `id` INT(11) unsigned  NOT NULL AUTO_INCREMENT,
 `job_category_id` int(11) NOT NULL,
@@ -402,9 +402,25 @@ CREATE TABLE IF NOT EXISTS `idp` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `idp`
+-- Dumping data for table `jdp`
 --
 
+CREATE TABLE IF NOT EXISTS `jdp` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `job_id` bigint(20) NOT NULL,
+  `job_verified_id` bigint(20) default NULL,
+  `jdp_idnumber` varchar(100) default NULL,
+  `jdp_orig_idnumber` varchar(100) default NULL,
+  `jdp_fname` varchar(50) default NULL,
+  `jdp_lname` varchar(50) default NULL,
+  `jdp_email` varchar(100) default NULL,
+  `jdp_phone` varchar(50) default NULL,
+  `current_location_id` bigint(20) default NULL,
+  `displacedfrom_location_id` bigint(20) default NULL,
+  `movedto_location_id` bigint(20) default NULL,
+  `jdp_move_date` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -568,10 +584,10 @@ PRIMARY KEY (`id`)
 CREATE TABLE IF NOT EXISTS `job_category` (
   `id` int(11) NOT NULL auto_increment,
   `job_id` bigint(20) NOT NULL default '0',
-  `job_category_id` int(11) NOT NULL default '0',
+  `j_category_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `job_category_ids` (`job_id`,`job_category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  UNIQUE KEY `job_category_ids` (`job_id`,`j_category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
 
 --
 -- Dumping data for table `incident_category`
@@ -626,6 +642,22 @@ PRIMARY KEY (`id`)
 -- Dumping data for table `comment`
 --
 
+CREATE TABLE IF NOT EXISTS `job_comment`
+(
+`id` BIGINT unsigned  NOT NULL AUTO_INCREMENT ,
+`job_id` BIGINT NOT NULL,
+`user_id` INT(11) DEFAULT 0,
+`comment_author` VARCHAR(100) default NULL,
+`comment_email` VARCHAR(120) default NULL,
+`comment_description` TEXT default NULL,
+`comment_ip` VARCHAR(100) default NULL,
+`comment_rating` VARCHAR(15) DEFAULT '0' NOT NULL,
+`comment_spam` TINYINT NOT NULL DEFAULT 0,
+`comment_active` TINYINT NOT NULL DEFAULT 0,
+`comment_date` DATETIME default NULL,
+`comment_date_gmt` DATETIME default NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -648,6 +680,20 @@ PRIMARY KEY (`id`)
 -- Dumping data for table `rating`
 --
 
+--
+-- Table structure for table `job rating`
+--
+
+CREATE TABLE IF NOT EXISTS `job_rating`
+(
+`id` BIGINT unsigned  NOT NULL AUTO_INCREMENT ,
+`job_id` BIGINT default NULL,
+`job_comment_id` BIGINT default NULL,
+`rating` TINYINT DEFAULT 0,
+`rating_ip` VARCHAR(100) default NULL,
+`rating_date` DATETIME default NULL,
+PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1091,6 +1137,20 @@ CREATE TABLE IF NOT EXISTS `verified` (
 -- Dumping data for table `verified`
 --
 
+--
+-- Table structure for table `job verified`
+--
+
+CREATE TABLE IF NOT EXISTS `job_verified` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `job_id` bigint(20) default NULL,
+  `jdp_id` bigint(20) default NULL,
+  `user_id` int(11) default NULL,
+  `job_verified_comment` longtext default NULL,
+  `job_verified_date` datetime default NULL,
+  `job_verified_status` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

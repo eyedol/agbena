@@ -24,6 +24,7 @@ $lang = array
 	'users' => 'Users',
 	'dashboard' => 'Dashboard',
 	'reports' => 'Reports',
+	'jobs' => 'Jobs',
 	'feedback' => 'Feedback',
 	'ushahidi' => 'Ushahidi',
 	'messages' => 'Messages',
