@@ -19,18 +19,6 @@
 		jQuery(function() {
 			var moved=false;
 
-			// Photoslider
-			photos = ["<?php echo join($incident_photos, '","'); ?> "];
-			FOTO.Slider.baseURL = "<?php echo url::base() . 'media/uploads/'; ?>";
-			FOTO.Slider.bucket = {  
-         		'default': {}  
-     		}; 
-     		for(var i = 0; i<photos.length; i++) {
-     			FOTO.Slider.bucket['default'][i] = {'main': photos[i], 
-     			                                    'thumb': photos[i].replace('.jpg', '_t.jpg')};
-     		}
-     		FOTO.Slider.reload('default');  
-			FOTO.Slider.preloadImages('default');
 			
 	
 			/*
@@ -102,7 +90,7 @@
 					color: function(feature)
 					{
 						if ( typeof(feature) != 'undefined' && 
-							feature.data.id == <?php echo $incident_id; ?>)
+							feature.data.id == <?php echo $job_id; ?>)
 						{
 							return "#CC0000";
 						}
@@ -115,7 +103,7 @@
 			});
 			
 			// Create the single marker layer
-			var markers = new OpenLayers.Layer.GML("single report", "<?php echo url::base() . 'json/?i=' . $incident_id; ?>", 
+			var markers = new OpenLayers.Layer.GML("single report", "<?php echo url::base() . 'json/?i=' . $job_id; ?>", 
 			{
 				format: OpenLayers.Format.GeoJSON,
 				projection: map.displayProjection,

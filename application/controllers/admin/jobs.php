@@ -569,33 +569,6 @@ class Jobs_Controller extends Admin_Controller
 				$person->person_date = date("Y-m-d H:i:s",time());
 				$person->save();
 				
-				
-				// STEP 6a: SAVE LINK TO REPORTER MESSAGE
-				// We're creating a report from a message with this option
-				if(isset($message_id) && $message_id != "")
-				{
-					$savemessage = ORM::factory('message', $message_id);
-					if ($savemessage->loaded == true) 
-					{
-						$savemessage->job_id = $job->id;
-						$savemessage->save();
-					}
-				}
-				
-				// STEP 6b: SAVE LINK TO NEWS FEED
-				// We're creating a report from a newsfeed with this option
-				if(isset($feed_item_id) && $feed_item_id != "")
-				{
-					$savefeed = ORM::factory('feed_item', $feed_item_id);
-					if ($savefeed->loaded == true) 
-					{
-						$savefeed->job_id = $job->id;
-						$savefeed->location_id = $location->id;
-						$savefeed->save();
-					}
-				}
-				
-				
 				// SAVE AND CLOSE?
 				if ($post->save == 1)		// Save but don't close
 				{
