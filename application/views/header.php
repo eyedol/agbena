@@ -99,6 +99,16 @@
 </head>
 
 <body id="page">
+	<div id="language-switch">
+    	<h3>Select Language</h3>
+        <p>
+        	<a href="?l=cp_HT" id="cp_HT" <?php if(Kohana::config('locale.language') == 'cp_HT' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/ht.png" align="left" /></span>Kreyol (CP)</a>
+         	<a href="?l=fr_FR" id="fr_FR" <?php if(Kohana::config('locale.language') == 'fr_FR' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/fr.png" align="left" /></span>Français (FR)</a>
+        	<a href="?l=es_AR" id="es_AR" <?php if(Kohana::config('locale.language') == 'es_AR' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/es.png" align="left" /></span>Español (AR)</a>
+          	<a href="?l=en_US" id="en_US" <?php if(Kohana::config('locale.language') == 'en_US' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/us.png" align="left" /></span>English (US)</a>
+       	</p>
+                                
+    </div>
 	<!-- wrapper -->
 	<div class="rapidxwpr floatholder">
 
@@ -107,16 +117,12 @@
 	
 			<!-- searchbox -->
 			<div id="searchbox">
-				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
-
 				<!-- languages -->
 				<div class="language-box">
-					<form>
-						<?php print form::dropdown('l', $locales_array, $l, ' onChange="this.form.submit()" '); ?>
-					</form>
+                     <strong>Search Reports Here:</strong> 
 				</div>
 				<!-- / languages -->
-			
+				
 				<!-- searchform -->
 				<div class="search-form">
 					<form method="get" id="search" action="<?php echo url::base() . 'search/'; ?>">
@@ -176,8 +182,8 @@
 				<!-- / mainmenu -->
 				<div class="submenu">
 					<ul class="clearingfix">
-						<li><a class="item1" href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>							
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li>
+						<li><a class="item1" href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'jobs') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.view_job'); ?></a></li>							
+						<li><a href="<?php echo url::base() . "jobs/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit_job'); ?></a></li>
 						<?php
 						// Contact Page
 						if ($site_contact_page)

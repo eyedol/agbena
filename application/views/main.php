@@ -15,9 +15,9 @@
  */
 ?>
 
-				<!-- main body -->
-				<div id="main" class="clearingfix">
-					<div id="mainmiddle" class="floatbox withright">
+<!-- main body -->
+<div id="main" class="clearingfix">
+	<div id="mainmiddle" class="floatbox withright">
 				
 						<!-- right column -->
 						<div id="right" class="clearingfix">
@@ -121,13 +121,11 @@
 									<strong><?php echo Kohana::lang('ui_main.filters'); ?></strong>
 									<ul>
 										<li><a id="media_0" class="active" href="#"><span><?php echo Kohana::lang('ui_main.reports'); ?></span></a></li>
-										<li><a id="media_4" href="#"><span><?php echo Kohana::lang('ui_main.news'); ?></span></a></li>
 										<li><a id="media_1" href="#"><span><?php echo Kohana::lang('ui_main.pictures'); ?></span></a></li>
-										<li><a id="media_2" href="#"><span><?php echo Kohana::lang('ui_main.video'); ?></span></a></li>
 										<li><a id="media_0" href="#"><span><?php echo Kohana::lang('ui_main.all'); ?></span></a></li>
 									</ul>
 </div>
-								<div style="float:right; width: 31%">
+								<div style="float:right; width: 35%">
 									<strong><?php echo Kohana::lang('ui_main.views'); ?></strong>
 									<ul>
 										<li><a id="view_0" <?php if($map_enabled === 'streetmap') { echo 'class="active" '; } ?>href="#"><span><?php echo Kohana::lang('ui_main.clusters'); ?></span></a></li>

@@ -307,6 +307,9 @@ class Reports_Controller extends Main_Controller {
 			$post->add_rules('incident_date', 'required', 'date_mmddyyyy');
 			$post->add_rules('incident_hour', 'required', 'between[1,12]');
 			$post->add_rules('incident_minute', 'required', 'between[0,59]');
+			$post->add_rules('person_first', 'required','length[3,100]');
+			$post->add_rules('person_last', 'required','length[3,100]');
+			$post->add_rules('person_email', 'required','email', 'length[3,100]');
 			
 			if ($_POST['incident_ampm'] != "am" && $_POST['incident_ampm'] != "pm")
 			{

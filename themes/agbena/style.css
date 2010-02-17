@@ -44,31 +44,24 @@ table.table-list tbody tr td a{
 }
 
 /* Logo Box */
-div#logo{
-	color : #fff;
-    background-color: transparent;
-}
-
-/*div#logo {
-	-moz-background-clip:border;
-	-moz-background-inline-policy:continuous;
-	-moz-background-origin:padding;
-	background:#E2E2E2 none repeat scroll 0 0;
-	border:0 none;
-	float:left;
-	margin:14px 0 0;
-	padding:35px 24px;
-}*/
-
-div#logo h1 {
-	font-size:20px;
-	margin:0;
-	padding:0;
-}
-
-div#logo span {
-	font-size:14px;
-}
+	
+	div#logo{
+		background-color:transparent;
+		padding-top:5px;
+		padding-bottom:0;
+		height:50px;
+	}
+	
+	div#logo h1{
+		color:#fff;
+		text-align : center;
+		font-size:36px;
+	}
+	
+	div#logo span{
+		color:#eee;
+		text-decoration : underline;
+	}
 
 div#middle {
 	/*-moz-background-clip:border;
@@ -88,23 +81,26 @@ div#middle {
 div#middle .background {
 	min-height:140px;
 }
+
+/**
+ * New Language Switcher
+ * code borrowed from haiti theme 
+ */
+	#language-switch { width:27px; border-bottom:2px solid #FFFFFF; border-left:2px solid #FFFFFF; border-top:2px solid #FFFFFF; position:absolute; overflow:hidden; right:0; top:160px; z-index:1; background:#cfe3ec; padding:8px 0 8px 8px; }
+	#language-switch.on { width:120px; } 
+	#language-switch h3 { width:120px; font-size:12px; font-weight:bold; background:transparent url(icon-language.png) 0 0 no-repeat; padding:0 0 0 28px; line-height:20px; margin-bottom:3px; }
+	#language-switch p {  width:120px; margin:0; padding:0; }
+	#language-switch p a { display:block; clear:both; color:#585858; }
+	#language-switch p a span { display:block; float:left; background:transparent; widows:16px; height:11px; padding:5px; margin:0 9px 0 0; }
+	#language-switch p a.active span { background:#fff; margin-right:7px; border:1px solid #000; }
+	#language-switch p a img { border:none; }
+	
+	div.language-box { margin-top:12px; }
+
 /* Main Menu */
 
-/** TODO make this rounded corner instead. **/
 div#mainmenu {
-	/*-moz-background-clip:border;
-	-moz-background-inline-policy:continuous;
-	-moz-background-origin:padding;*/
-	
-	/*moz-border-radius-topleft : 10px;
-	-webkit-border-top-left-radius:10px;
-    -moz-border-radius-topright:10px;
-    -webkit-border-top-right-radius:10px;
-    
-	/*-moz-border-radius: 5px; 
-	-webkit-border-radius: 5px;*/
 	background:#033649 none repeat scroll 0 0;
-	/*border:2px solid transparent;*/
 	color : #FFF;
 	padding:7px 10px;
 }
@@ -126,7 +122,7 @@ div#mainmenu a.active{
 }
 
 .submenu{
-	padding : 20px 20px 20px 30px;;
+	padding : 20px 10px 20px 30px;
 	width : 100%;
 }
 
@@ -156,6 +152,20 @@ div#mainmenu a.active{
 
 .submenu ul li a:hover{
     text-decoration: underline;
+}
+
+/* report */
+.report_left{
+	float:left;
+	width:380px;
+	margin:20px 0 0;
+	padding:0 0 10px;
+}
+.report_right{
+	overflow:hidden;
+	width:455px;
+	margin:20px 0 0 25px;
+	padding:0 0 10px;
 }
 
 /* Submit Button */
