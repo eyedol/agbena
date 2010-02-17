@@ -38,10 +38,8 @@ class Jobsmain_Controller extends Template_Controller {
         // Load Header & Footer
         $this->template->header  = new View('header');
         $this->template->footer  = new View('footer');
-		
-		//call the feedback form
-		$this->_get_feedback_form();
         
+        $this->_get_feedback_form();
 		// Retrieve Default Settings
 		$site_name = Kohana::config('settings.site_name');
 			// Prevent Site Name From Breaking up if its too long
@@ -407,7 +405,7 @@ class Jobsmain_Controller extends Template_Controller {
 	 * Get the feedback
 	 */
 	private function _get_feedback_form() {
-		//setup and initialize form fields
+				//setup and initialize form fields
 		$form = array
 		(
 				'feedback_message' => '',
@@ -451,7 +449,7 @@ class Jobsmain_Controller extends Template_Controller {
 						$config = array(
 							'blog_url' => url::site(),
 							'api_key' => $api_akismet,
-							'jobapply' => $jobapply
+							'feedback' => $feedback
 						);
 
 						$akismet->init($config);
@@ -489,7 +487,23 @@ class Jobsmain_Controller extends Template_Controller {
 					{ // No API Key!!
 						$feedback_spam = 0;
 					}
-				$this->_send_feedback($post );
+				$this->_dump_feedback($post);
+
+
+				//send details to admin
+				$frm = $post->person_email;
+				$subject = Kohana::lang('feedback.feedback_details');;
+				$message = $post->feedback_message;
+				$email = Kohana::config('settings.site_email');
+				$this->_send_feedback( $email, $message, $subject, $frm );
+
+				//send details to ushahidi
+				$frm = $post->person_email;
+				$subject = Kohana::lang('feedback.feedback_details');;
+				$message = $post->feedback_message;
+				$message .= "Instance: ".url::base();
+				$email = "feedback@ushahidi.com";
+				$this->_send_feedback( $email, $message, $subject, $frm );
 			}
 			else
 	        {
@@ -497,11 +511,11 @@ class Jobsmain_Controller extends Template_Controller {
 	            $form = arr::overwrite($form, $post->as_array());
 
 	            // populate the error fields, if any
-	            $errors = arr::overwrite($errors, $post->errors('jobapply'));
+	            $errors = arr::overwrite($errors, $post->errors('feedback'));
 				$form_error = TRUE;
 			}
 		}
-		$this->template->footer->js = new View('job_apply_js');
+		$this->template->footer->js = new View('footer_form_js');
 		$this->template->footer->form = $form;
 		$this->template->footer->captcha = $captcha;
 		$this->template->footer->errors = $errors;
@@ -520,22 +534,20 @@ class Jobsmain_Controller extends Template_Controller {
             }
             return $str;
         }
-	
-	/**
-	 * send application now
+        
+        /**
+	 * Send feedback info as email to admin and Ushahidi
 	 */
-	public function _send_feedback( $post )
+	public function _send_feedback( $email, $message, $subject, $frm )
 	{
-		$site_email = Kohana::config('settings.site_email');
-		$message = "Sender: " . $post->contact_name . "\n";
-		$message .= "Email: " . $post->contact_email . "\n";
-		$message .= "Phone: " . $post->contact_phone . "\n\n";
-		$message .= "Message: \n" . $post->contact_message . "\n\n\n";
-		$message .= "~~~~~~~~~~~~~~~~~~~~~~\n";
-		$message .= "This message was sent from your website at " . url::base();
-		// Send Admin Message
-		if(email::send( $site_email, $post->contact_email, $post->contact_subject, $message, FALSE ) == 1 ) { 
-			//email details
+		$to = $email;
+		$from = $frm;
+		$subject = $subject;
+		
+		$message .= "\n\n";
+		//email details
+		if( email::send( $to, $from, $subject, $message, FALSE ) == 1 )
+		{
 			return TRUE;
 		}
 		else 

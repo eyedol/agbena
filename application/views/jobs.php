@@ -1,6 +1,6 @@
 <?php 
 /**
- *  Reports view page.
+ *  Jobs view page.
  *
  * PHP version 5
  * LICENSE: This source file is subject to LGPL license 
@@ -18,26 +18,24 @@
 	<div class="content-bg">
 		<!-- start reports block -->
 		<div class="big-block">
-			<h1>Reports <?php echo ($category_title) ? " in $category_title" : ""?>
+			<h1>Jobs <?php echo ($job_category_title) ? " in $job_category_title" : ""?>
 			<?php echo $pagination_stats; ?></h1>
 								
-			<?php echo $report_chart; ?>
-								
-		<div class="report_rowtitle">
-			<div class="report_col2">
-				<strong>TITLE</strong>
+			<div class="report_rowtitle">
+				<div class="report_col2">
+					<strong>TITLE</strong>
+				</div>
+				<div class="report_col3">
+					<strong>DATE</strong>
+				</div>
+				<div class="report_col4">
+					<strong>LOCATION</strong>
+				</div>
+				<div class="report_col5">
+					<strong>VERIFIED?</strong>
+				</div>
 			</div>
-			<div class="report_col3">
-				<strong>DATE</strong>
-			</div>
-			<div class="report_col4">
-				<strong>LOCATION</strong>
-			</div>
-			<div class="report_col5">
-				<strong>VERIFIED?</strong>
-			</div>
-		</div>
-		<?php
+			<?php
 			foreach ($jobs as $job)
 			{
 				$job_id = $job->id;
@@ -47,7 +45,7 @@
 				// Trim to 150 characters without cutting words
 				//XXX: Perhaps delcare 150 as constant
 				$job_description = text::limit_chars($job_description, 150, "...", true);
-				$job_date = date('Y-m-d', strtotime($job->job_date));
+				$job_date = date('Y-m-d', strtotime($job->job_dateadd));
 				$job_location = $job->location->location_name;
 				$job_verified = $job->job_verified;
 				if ($job_verified)
@@ -59,13 +57,6 @@
 					$job_verified = "<span class=\"report_no\">NO</span>";
 				}
 												
-				echo "<div class=\"report_row1\">";
-				echo "	<div class=\"report_thumb report_col1\">";
-				echo "			&nbsp;";
-				if(isset($media_icons[$job_id])){
-					echo $media_icons[$job_id];
-				}
-				echo "		</div>";
 				echo "		<div class=\"report_details report_col2\">";
 				echo "			<h3><a href=\"" . url::base() . "reports/view/" . $job_id . "\">" . $job_title . "</a></h3>";
 				echo $job_description;

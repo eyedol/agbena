@@ -149,8 +149,8 @@ class Jobs_Controller extends Jobsmain_Controller {
 	 */
 	public function submit($id = false, $saved = false)
 	{
-		$this->template->header->this_page = 'reports_submit';
-		$this->template->content = new View('reports_submit');
+		$this->template->header->this_page = 'jobs_submit';
+		$this->template->content = new View('jobs_submit');
 		
 		// setup and initialize form field names
 		$form = array
@@ -167,9 +167,10 @@ class Jobs_Controller extends Jobsmain_Controller {
             'person_email' => '',
             
 		);
+		
 		//	copy the form as errors, so the errors will be stored with keys corresponding to the form field names
 		$errors = $form;
-                $form_error = FALSE;
+        $form_error = FALSE;
 
         if ($saved == 'saved')
 		{
@@ -257,7 +258,7 @@ class Jobs_Controller extends Jobsmain_Controller {
 				$location->save();
 				
 				// STEP 2: SAVE job
-				$job = new job_Model();
+				$job = new Job_Model();
                 $job->location_id = $location->id;
               
 				$job->user_id = 0;
@@ -291,7 +292,7 @@ class Jobs_Controller extends Jobsmain_Controller {
 				$person->person_date = date("Y-m-d H:i:s",time());
 				$person->save();
 				
-				url::redirect('reports/thanks');
+				url::redirect('jobs/thanks');
 			}
 	
 			// No! We have validation errors, we need to show the form again, with the errors
@@ -317,10 +318,6 @@ class Jobs_Controller extends Jobsmain_Controller {
 		$this->template->content->errors = $errors;
 		$this->template->content->form_error = $form_error;
 		$this->template->content->categories = $this->_get_categories($form['job_category']);
-
-                // Retrieve Custom Form Fields Structure
-		$disp_custom_fields = $this->_get_custom_form_fields($id,$form['form_id'],false);
-		$this->template->content->disp_custom_fields = $disp_custom_fields;
 
 
 		// Javascript Header
@@ -592,8 +589,8 @@ class Jobs_Controller extends Jobsmain_Controller {
 	 */
 	function thanks()
 	{
-		$this->template->header->this_page = 'reports_submit';
-		$this->template->content = new View('reports_submit_thanks');
+		$this->template->header->this_page = 'jobs_submit';
+		$this->template->content = new View('jobs_submit_thanks');
 	}
 	
 	/**
@@ -611,7 +608,7 @@ class Jobs_Controller extends Jobsmain_Controller {
 		{
 			$job = ORM::factory('job', $id);
 			
-			$person = ORM::factory('job_person',$id);
+			$person = ORM::factory('job_person')->where('job_id',$id)->find();
 			
 			if ( $job->id == 0 )	// Not Found
 			{
@@ -654,7 +651,7 @@ class Jobs_Controller extends Jobsmain_Controller {
 				// Test to see if things passed the rule checks
 				if ($post->validate())
 				{
-					$form_sent = $this->_send_application($post, $person->person_email);
+					$form_sent = $this->_send_application($post, $person->person_email,$id);
 				
             	}
             	// No! We have validation errors, we need to show the form again, with the errors
@@ -983,22 +980,6 @@ class Jobs_Controller extends Jobsmain_Controller {
 						$feedback_spam = 0;
 					}
 				$this->_dump_feedback($post);
-
-
-				//send details to admin
-				$frm = $post->person_email;
-				$subject = Kohana::lang('feedback.feedback_details');;
-				$message = $post->feedback_message;
-				$email = Kohana::config('settings.site_email');
-				$this->_send_feedback( $email, $message, $subject, $frm );
-
-				//send details to ushahidi
-				$frm = $post->person_email;
-				$subject = Kohana::lang('feedback.feedback_details');;
-				$message = $post->feedback_message;
-				$message .= "Instance: ".url::base();
-				$email = "feedback@ushahidi.com";
-				$this->_send_feedback( $email, $message, $subject, $frm );
 			}
 			else
 	        {
@@ -1017,19 +998,31 @@ class Jobs_Controller extends Jobsmain_Controller {
 		$this->template->footer->form_error = $form_error;
 	}
 	
-	private function _send_application($post,$person_email) {
+	private function _send_application($post,$person_email,$id) {
+		
 		$site_email = Kohana::config('settings.site_email');
-		$message = "Sender: " . $post->contact_name . "\n";
-		$message .= "Email: " . $post->contact_email . "\n";
-		$message .= "Phone: " . $post->contact_phone . "\n\n";
-		$message .= "Message: \n" . $post->contact_message . "\n\n\n";
+		
+		$message = "Sender: " . $post->contact_name . "<br />";
+		$message .= "Email: " . $post->contact_email . "<br />";
+		$message .= "Phone: " . $post->contact_phone . "<br /><br />";
+		$message .= "Message: \n" . $post->contact_message . "<br /><br /><br />";
 		$message .= "~~~~~~~~~~~~~~~~~~~~~~\n";
-		$message .= "This message was sent from your website at " . url::base();
-		// Send Admin Message
-		if( email::send( $person_email, $post->contact_email, $post->contact_subject, $message, FALSE ) == 1 ) 
+		$message .= "This is a reponse to the job placement below<br /><br />";
+		$message . url::base()."jobs/view/$id";
+		
+		$to = $person_email;
+		$from = $post->contact_email;
+		$subject = $post->contact_subject;
+		
+		//email details
+		if( email::send( $to, $from, $subject, $message, TRUE ) == 1 )
+		{
 			return TRUE;
-		else
+		}
+		else 
+		{
 			return FALSE;
+		}
 	}
         
 } // End Reports

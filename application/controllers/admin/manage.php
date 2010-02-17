@@ -202,6 +202,181 @@ class Manage_Controller extends Admin_Controller
         $this->template->colorpicker_enabled = TRUE;
         $this->template->js = new View('admin/categories_js');
     }
+    
+    /*
+	Add Edit Job Categories
+	*/
+	function jobcategories()
+	{	
+		$this->template->content = new View('admin/job_categories');
+		$this->template->content->title = 'Job Categories';
+		
+		// setup and initialize form field names
+		$form = array
+	    (
+			'action' => '',
+			'j_category_id'      => '',
+			'parent_id'      => '',
+			'job_category_title'      => '',
+	        'job_category_description'    => '',
+	        'job_category_color'  => '',
+			'job_category_image'  => ''
+	    );
+	    
+		// copy the form as errors, so the errors will be stored with keys corresponding to the form field names
+	    $errors = $form;
+		$form_error = FALSE;
+		$form_saved = FALSE;
+		$form_action = "";
+		$parents_array = array();
+		// check, has the form been submitted, if so, setup validation
+	    if ($_POST)
+	    {
+	        // Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
+			$post = Validation::factory(array_merge($_POST,$_FILES));
+			
+	         //  Add some filters
+	        $post->pre_filter('trim', TRUE);
+	
+			if ($post->action == 'a')		// Add Action
+			{
+				// Add some rules, the input field, followed by a list of checks, carried out in order
+				$post->add_rules('parent_id','required','numeric');
+				$post->add_rules('job_category_title','required', 'length[3,80]');
+				$post->add_rules('job_category_description','required');
+				$post->add_rules('job_category_color','required', 'length[6,6]');
+				$post->add_rules('job_category_image', 'upload::valid', 
+					'upload::type[gif,jpg,png]', 'upload::size[50K]');
+				$post->add_callbacks('parent_id', array($this,'parent_id_chk'));
+			}
+			
+			// Test to see if things passed the rule checks
+	        if ($post->validate())
+	        {
+				$category_id = $post->category_id;
+				$category = new J_Category_Model($category_id);
+				
+				if( $post->action == 'd' )
+				{ // Delete Action
+					$category->delete( $category_id );
+					$form_saved = TRUE;
+					$form_action = "DELETED";
+			
+				}
+				else if( $post->action == 'v' )
+				{ // Show/Hide Action
+	            	if ($category->loaded==true)
+					{
+						if ($category->job_category_visible == 1) {
+							$category->job_category_visible = 0;
+						}
+						else {
+							$category->job_category_visible = 1;
+						}
+						$category->save();
+						$form_saved = TRUE;
+						$form_action = "MODIFIED";
+					}
+				}
+				else if( $post->action == 'i' )
+				{ // Delete Image/Icon Action
+	            	if ($category->loaded==true)
+					{
+						$category_image = $category->job_category_image;
+						if (!empty($category_image)
+						&& file_exists(Kohana::config('upload.directory', TRUE).$category_image))
+							unlink(Kohana::config('upload.directory', TRUE) . $category_image);
+						$category->job_category_image = null;
+						$category->save();
+						$form_saved = TRUE;
+						$form_action = "MODIFIED";
+					}
+				} 
+				else if( $post->action == 'a' )
+				{ // Save Action				
+					$category->parent_id = $post->parent_id;
+					$category->job_category_title = $post->job_category_title;
+					$category->job_category_description = $post->job_category_description;
+					$category->job_category_color = $post->job_category_color;
+					$category->save();
+					
+					// Upload Image/Icon
+					$filename = upload::save('j_category_image');
+					if ($filename)
+					{
+						$new_filename = "category_".$category->id."_".time();
+
+						// Resize Image to 32px if greater
+						Image::factory($filename)->resize(32,32,Image::HEIGHT)
+							->save(Kohana::config('upload.directory', TRUE) . $new_filename.".png");
+
+						// Remove the temporary file
+						unlink($filename);
+						
+						// Delete Old Image
+						$category_old_image = $category->job_category_image;
+						if (!empty($category_old_image)
+							&& file_exists(Kohana::config('upload.directory', TRUE).$category_old_image))
+							unlink(Kohana::config('upload.directory', TRUE).$category_old_image);
+						
+						// Save
+						$category->job_category_image = $new_filename.".png";
+						$category->save();
+					}
+					
+					$form_saved = TRUE;
+					$form_action = "ADDED/EDITED";
+				}
+	        }
+            // No! We have validation errors, we need to show the form again, with the errors
+	        else
+			{
+	            // repopulate the form fields
+	            $form = arr::overwrite($form, $post->as_array());
+
+               // populate the error fields, if any
+                $errors = arr::overwrite($errors, $post->errors('category'));
+                $form_error = TRUE;
+            }
+        }
+
+        // Pagination
+        $pagination = new Pagination(array(
+                            'query_string' => 'page',
+                            'items_per_page' => (int) Kohana::config('settings.items_per_page_admin'),
+                            'total_items'    => ORM::factory('j_category')
+													->where('parent_id','0')
+													->count_all()
+                        ));
+
+        $categories = ORM::factory('j_category')
+						->where('parent_id','0')
+                        ->orderby('job_category_title', 'asc')
+                        ->find_all((int) Kohana::config('settings.items_per_page_admin'), 
+                            $pagination->sql_offset);
+		 $parents_array = ORM::factory('j_category')
+            ->where('parent_id','0')
+            ->select_list('id', 'job_category_title');
+        // add none to the list
+        $parents_array[0] = "--- Top Level Category ---";
+		
+		$this->template->content->errors = $errors;
+        $this->template->content->form_error = $form_error;
+        $this->template->content->form_saved = $form_saved;
+		$this->template->content->form_action = $form_action;
+        $this->template->content->pagination = $pagination;
+        $this->template->content->total_items = $pagination->total_items;
+        $this->template->content->categories = $categories;
+		
+		$this->template->content->parents_array = $parents_array;
+
+		// Locale (Language) Array
+		$this->template->content->locale_array = Kohana::config('locale.all_languages');
+
+        // Javascript Header
+        $this->template->colorpicker_enabled = TRUE;
+        $this->template->js = new View('admin/job_categories_js');
+    }
 
 	/*
 	Add Edit Organizations

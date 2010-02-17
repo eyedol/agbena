@@ -46,7 +46,7 @@
 				?>
 					<!-- green-box -->
 					<div class="green-box">
-						<h3>Your Message Has Been Sent!</h3>
+						<h3>Your Message Has Been Sent! <a href="<?php echo url::base()."jobs/view/$job_id"?>" ?>To previous page</a></h3>
 					</div>
 				<?php
 				}								

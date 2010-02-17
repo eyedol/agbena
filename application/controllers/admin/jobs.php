@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Reports Controller.
+ * Jobs Controller.
  * This controller will take care of adding and editing jobs in the Admin section.
  *
  * PHP version 5

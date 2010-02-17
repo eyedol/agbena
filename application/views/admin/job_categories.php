@@ -15,9 +15,9 @@
 ?>
 			<div class="bg">
 				<h2>
-					<a href="<?php echo url::base() . 'admin/manage' ?>" class="active">Categories</a>
+					<a href="<?php echo url::base() . 'admin/manage' ?>" >Categories</a>
+					<a href="<?php echo url::base() . 'admin/manage/jobcategories' ?>" class="active">Job Categories</a>
 					<span>(<a href="#add">Add New</a>)</span>
-					<a href="<?php echo url::base() . 'admin/manage/jobcategories' ?>" >Job Categories</a>
 					<a href="<?php echo url::base() . 'admin/manage/forms' ?>">Forms</a>
 					<a href="<?php echo url::base() . 'admin/manage/organizations' ?>">Organizations</a>
 					<a href="<?php echo url::base() . 'admin/manage/pages' ?>">Pages</a>
@@ -92,11 +92,11 @@
 									{
 										$category_id = $category->id;
 										$parent_id = $category->parent_id;
-										$category_title = $category->category_title;
-										$category_description = substr($category->category_description, 0, 150);
-										$category_color = $category->category_color;
-										$category_image = $category->category_image;
-										$category_visible = $category->category_visible;
+										$category_title = $category->job_category_title;
+										$category_description = substr($category->job_category_description, 0, 150);
+										$category_color = $category->job_category_color;
+										$category_image = $category->job_category_image;
+										$category_visible = $category->job_category_visible;
 										?>
 										<tr>
 											<td class="col-1">&nbsp;</td>
@@ -133,11 +133,11 @@
 										{
 											$category_id = $child->id;
 											$parent_id = $child->parent_id;
-											$category_title = $child->category_title;
-											$category_description = substr($child->category_description, 0, 150);
-											$category_color = $child->category_color;
-											$category_image = $child->category_image;
-											$category_visible = $child->category_visible;
+											$category_title = $child->job_category_title;
+											$category_description = substr($child->job_category_description, 0, 150);
+											$category_color = $child->job_category_color;
+											$category_image = $child->job_category_image;
+											$category_visible = $child->job_category_visible;
 											?>
 											<tr>
 												<td class="col-1">&nbsp;</td>
@@ -194,15 +194,15 @@
 							id="action" value="a"/>
 						<div class="tab_form_item">
 							<strong>Category Name:</strong><br />
-							<?php print form::input('category_title', '', ' class="text"'); ?>
+							<?php print form::input('job_category_title', '', ' class="text"'); ?>
 						</div>
 						<div class="tab_form_item">
 							<strong>Description:</strong><br />
-							<?php print form::input('category_description', '', ' class="text"'); ?>
+							<?php print form::input('job_category_description', '', ' class="text"'); ?>
 						</div>
 						<div class="tab_form_item">
 							<strong>Color:</strong><br />
-							<?php print form::input('category_color', '', ' class="text"'); ?>
+							<?php print form::input('job_category_color', '', ' class="text"'); ?>
 							<script type="text/javascript" charset="utf-8">
 								$(document).ready(function() {
 									$('#category_color').ColorPicker({
@@ -232,7 +232,7 @@
 							<?php
 								
 								// I removed $category_image from the second parameter to fix bug #161
-								print form::upload('category_image', '', '');
+								print form::upload('job_category_image', '', '');
 							
 							?>
 						</div>

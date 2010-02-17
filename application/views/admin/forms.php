@@ -16,6 +16,7 @@
 		<div class="bg">
 			<h2>
 				<a href="<?php echo url::base() . 'admin/manage' ?>">Categories</a>
+				<a href="<?php echo url::base() . 'admin/manage/jobcategories' ?>">Job Categories</a>
 				<a href="<?php echo url::base() . 'admin/manage/forms' ?>" class="active">Forms</a>
 				<span>(<a href="#add">Add New</a>)</span>
 				<a href="<?php echo url::base() . 'admin/manage/organizations' ?>">Organizations</a>

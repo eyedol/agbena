@@ -1,6 +1,7 @@
 		<div class="bg">
 				<h2>
 					<a href="<?php echo url::base() . 'admin/manage' ?>">Categories</a>
+					<a href="<?php echo url::base() . 'admin/manage/jobcategories' ?>" >Job Categories</a>
 					<a href="<?php echo url::base() . 'admin/manage/forms' ?>">Forms</a>
 					<a href="<?php echo url::base() . 'admin/manage/organizations' ?>">Organizations</a>
 					<a href="<?php echo url::base() . 'admin/manage/pages' ?>">Pages</a>

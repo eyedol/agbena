@@ -148,7 +148,7 @@
 				<?php print form::input('captcha', $form['captcha'], ' class="text"'); ?>
 			</div>
 			<div class="report_row">
-				<input name="submit" type="submit" value="Submit Comment" class="btn_blue" />
+				<input name="submit" type="submit" value="Submit Comment" class="btn_submit" />
 			</div>
 			<?php print form::close(); ?>
 		</div>

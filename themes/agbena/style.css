@@ -1,0 +1,188 @@
+/*
+Theme Name: Agbena
+Description: Theme for the agbena website based on the Terra theme.
+Demo: http://www.agbena.com
+Version: 1.0
+Author: Henry Addo
+Author Email: henry@ushahidi.com
+*/
+
+/* header background */
+body#page{
+	background: #031634 url(terra.gif) 50% 0 repeat-x;
+}
+
+/* footer */
+div#footer
+{
+	background-color: #033649;
+}
+div#underfooter{
+	border-top : 3px solid #fff;
+	background-color:#033649;
+}
+
+div.content-container {
+	/*-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;*/
+	background:#E2E2E2 none repeat scroll 0 0;
+	border : none;
+	padding:10px;
+}
+
+/* links */
+a{
+    color: #3764aa;
+}
+
+a:hover{
+    color: #008cff;
+}
+
+table.table-list tbody tr td a{
+    color: #0099CC;
+}
+
+/* Logo Box */
+div#logo{
+	color : #fff;
+    background-color: transparent;
+}
+
+/*div#logo {
+	-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;
+	background:#E2E2E2 none repeat scroll 0 0;
+	border:0 none;
+	float:left;
+	margin:14px 0 0;
+	padding:35px 24px;
+}*/
+
+div#logo h1 {
+	font-size:20px;
+	margin:0;
+	padding:0;
+}
+
+div#logo span {
+	font-size:14px;
+}
+
+div#middle {
+	/*-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;*/
+	
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	
+	background:#FFFFFF none repeat scroll 0 0;
+	border : 3px solid #fff;
+	clear:both;
+	margin:0;
+	width:auto;
+}
+
+div#middle .background {
+	min-height:140px;
+}
+/* Main Menu */
+
+/** TODO make this rounded corner instead. **/
+div#mainmenu {
+	/*-moz-background-clip:border;
+	-moz-background-inline-policy:continuous;
+	-moz-background-origin:padding;*/
+	
+	/*moz-border-radius-topleft : 10px;
+	-webkit-border-top-left-radius:10px;
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-right-radius:10px;
+    
+	/*-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;*/
+	background:#033649 none repeat scroll 0 0;
+	/*border:2px solid transparent;*/
+	color : #FFF;
+	padding:7px 10px;
+}
+
+
+div#mainmenu a{
+    color: #fff;
+}
+
+div#mainmenu a:hover{
+	color: #fff;
+    background-color: #036564;
+    text-decoration : underline;
+}
+
+div#mainmenu a.active{
+    color: #fff;
+    background-color: #036564;
+}
+
+.submenu{
+	padding : 20px 20px 20px 30px;;
+	width : 100%;
+}
+
+.submenu ul{
+    list-style: none;
+    margin: 0 0 10px 0;
+}
+
+.submenu ul li{
+    list-style: none;
+    float: left;
+}
+
+.submenu ul li a{
+    color : #999;	
+	font-weight : bold;
+	line-height : 10px;
+    border-left: #CCC 1px solid;
+    padding: 0 10px;
+    text-decoration: none;
+}
+
+.submenu ul li a.item1{
+    border: none;
+    padding-left: 0;
+}
+
+.submenu ul li a:hover{
+    text-decoration: underline;
+}
+
+/* Submit Button */
+div.submit-incident a{
+    background-color: #CDB380;
+    color: #000;
+}
+
+div.submit-incident a:hover{
+	background-color: #368C00;
+}
+
+
+/* Category Filter Side Bar */
+ul.category-filters{
+    background: #E7E3DA;
+    border-top-color: #C7C2BC;
+    border-bottom-color: #C7C2BC;
+}
+
+ul.category-filters li a{
+    color: #3F3F3F;
+    border-color: #E7E3DA;
+}
+
+ul.category-filters li a:hover, ul.category-filters li a.active {
+    color: #FFFFFF;
+    background-color: #036564;
+    border-color: #036564;
+}
