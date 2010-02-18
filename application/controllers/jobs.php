@@ -264,11 +264,6 @@ class Jobs_Controller extends Jobsmain_Controller {
 				$job->user_id = 0;
 				$job->job_title = $post->job_title;
 				$job->job_description = $post->job_description;
-				
-				$job_date=explode("/",$post->job_dateadd);
-				
-				// The $_POST['date'] is a value posted by form in mm/dd/yyyy format
-				$job_date=$job_date[2]."-".$job_date[0]."-".$job_date[1];
 					
 				$job->job_dateadd = date("Y-m-d H:i:s",time());
 				$job->save();
@@ -1006,8 +1001,8 @@ class Jobs_Controller extends Jobsmain_Controller {
 		$message .= "Email: " . $post->contact_email . "<br />";
 		$message .= "Phone: " . $post->contact_phone . "<br /><br />";
 		$message .= "Message: \n" . $post->contact_message . "<br /><br /><br />";
-		$message .= "This is a reponse to the job placement below<br /><br />";
-		$message .= url::base()."jobs/view/$id";
+		$message .= "This is a reponse to the job placement below<br />";
+		$message .= url::base()."jobs/view/$id <br /><br />";
 		$message .= "~~~~~~~~~~~~~~~~~~~~~~<br />";
 		$to = $person_email;
 		$from = $post->contact_email;
