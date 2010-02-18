@@ -205,14 +205,6 @@
 			
 			
 			// Some Default Values		
-			$("#alert_mobile").focus(function() {
-				$("#alert_mobile_yes").attr("checked",true);
-			}).blur(function() {
-				if( !this.value.length ) {
-					$("#alert_mobile_yes").attr("checked",false);
-				}
-			});
-			
 			$("#alert_email").focus(function() {
 				$("#alert_email_yes").attr("checked",true);
 			}).blur(function() {

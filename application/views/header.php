@@ -182,8 +182,9 @@
 				<!-- / mainmenu -->
 				<div class="submenu">
 					<ul class="clearingfix">
-						<li><a class="item1" href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'jobs') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.view_job'); ?></a></li>							
-						<li><a href="<?php echo url::base() . "jobs/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit_job'); ?></a></li>
+						<li><a class="item1" href="<?php echo url::base() . "jobsmain" ?>" <?php if ($this_page == 'jobsmain') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.jobs_main'); ?></a></li>
+						<li><a class="item1" href="<?php echo url::base() . "jobs" ?>" <?php if ($this_page == 'jobs') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.view_job'); ?></a></li>							
+						<li><a href="<?php echo url::base() . "jobs/submit" ?>" <?php if ($this_page == 'jobs_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit_job'); ?></a></li>
 						<?php
 						// Contact Page
 						if ($site_contact_page)

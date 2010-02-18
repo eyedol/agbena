@@ -60,6 +60,7 @@ table.table-list tbody tr td a{
 	
 	div#logo span{
 		color:#eee;
+		font-weight : bold;
 		text-decoration : underline;
 	}
 
@@ -96,6 +97,29 @@ div#middle .background {
 	#language-switch p a img { border:none; }
 	
 	div.language-box { margin-top:12px; }
+
+/** Borrowed code from haiti theme 
+ How To Report on home page) */
+div.additional-content ol { margin:0; }
+	
+li.report { 
+	list-style-type:none; padding:0 0 0 25px; margin-bottom:8px;
+}
+.r-sms		{ 
+	background:transparent url(icons.png) 0 -97px no-repeat;
+}
+
+.r-email	{ 
+	background:transparent url(icons.png) 0 -174px no-repeat; 
+}
+
+.r-twitter	{ 
+	background:transparent url(icons.png) 0 -55px no-repeat;
+ }
+ 
+.r-online	{ 
+	background:transparent url(icons.png) 0 -141px no-repeat; 
+}
 
 /* Main Menu */
 

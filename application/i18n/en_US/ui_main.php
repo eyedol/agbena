@@ -7,6 +7,7 @@
 $lang = array(
 	'search' => 'SEARCH',
 	'home' => 'Home',
+	'jobs_main' => 'Jobs Main',
 	'reports' => 'Profiles',
 	'view_job' => 'Jobs',
 	'view_profiles' => 'Profiles',

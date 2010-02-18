@@ -1006,10 +1006,9 @@ class Jobs_Controller extends Jobsmain_Controller {
 		$message .= "Email: " . $post->contact_email . "<br />";
 		$message .= "Phone: " . $post->contact_phone . "<br /><br />";
 		$message .= "Message: \n" . $post->contact_message . "<br /><br /><br />";
-		$message .= "~~~~~~~~~~~~~~~~~~~~~~\n";
 		$message .= "This is a reponse to the job placement below<br /><br />";
-		$message . url::base()."jobs/view/$id";
-		
+		$message .= url::base()."jobs/view/$id";
+		$message .= "~~~~~~~~~~~~~~~~~~~~~~<br />";
 		$to = $person_email;
 		$from = $post->contact_email;
 		$subject = $post->contact_subject;

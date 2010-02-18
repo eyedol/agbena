@@ -44,15 +44,13 @@ class Alerts_Controller extends Main_Controller
         $this->template->content->cities = $this->_get_cities($default_country);
 		
 		// Setup and initialize form field names
-        $form = array (
-                'alert_mobile' => '',
-                'alert_mobile_yes' => '',
-                'alert_email' => '',
-                'alert_email_yes' => '',
-                'alert_lat' => '',
-                'alert_lon' => '',
-				'alert_radius' => ''
-        	);
+        $form = array (                
+           	'alert_email' => '',
+           	'alert_email_yes' => '',
+           	'alert_lat' => '',
+           	'alert_lon' => '',
+			'alert_radius' => ''
+        );
 
         // Copy the form as errors, so the errors will be stored with keys
         // corresponding to the form field names
@@ -72,19 +70,13 @@ class Alerts_Controller extends Main_Controller
                 // Yes! everything is valid
 				// Save alert and send out confirmation code
 
-				if (!empty($post->alert_mobile))
-				{
-        			$this->_send_mobile_alert($post->alert_mobile,
-								$post->alert_lon, $post->alert_lat, $post->alert_radius);
-				}
-
 				if (!empty($post->alert_email))
 				{
 					$this->_send_email_alert($post->alert_email,
 								$post->alert_lon, $post->alert_lat, $post->alert_radius);
 				}
 
-                $this->session->set('alert_mobile', $post->alert_mobile);
+                //$this->session->set('alert_mobile', $post->alert_mobile);
                 $this->session->set('alert_email', $post->alert_email);
                 
 				url::redirect('alerts/confirm');					
@@ -138,10 +130,6 @@ class Alerts_Controller extends Main_Controller
     {
 		$this->template->header->this_page = 'alerts';
 		$this->template->content = new View('alerts_confirm');
-
-		$this->template->content->alert_mobile = 
-			(isset($_SESSION['alert_mobile']) && !empty($_SESSION['alert_mobile'])) ?
-				$_SESSION['alert_mobile'] : "";
 		
 		$this->template->content->alert_email = 
 			(isset($_SESSION['alert_email']) && !empty($_SESSION['alert_email'])) ?
@@ -171,13 +159,8 @@ class Alerts_Controller extends Main_Controller
 		if ( $_POST && isset($_POST['alert_code'])
 			&& !empty($_POST['alert_code']) )
 		{
-			if (isset($_POST['alert_mobile']) && 
-				!empty($_POST['alert_mobile']))
-			{
-				$filter = "alert_type=1 AND alert_code='".strtoupper($_POST['alert_code'])
-					."' AND alert_recipient='".$_POST['alert_mobile']."' ";
-			}
-			elseif (isset($_POST['alert_email']) && 
+		
+			if (isset($_POST['alert_email']) && 
 				!empty($_POST['alert_email']))
 			{
 				$filter = "alert_type=2 AND alert_code='".$_POST['alert_code']

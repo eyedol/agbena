@@ -71,22 +71,6 @@
 										<div class="box">
 											<label>
 												<?php
-													if ($form['alert_mobile_yes'] == 1) {
-														$checked = true;
-													}
-													else
-													{
-													 	$checked = false;
-													}
-													print form::checkbox('alert_mobile_yes', '1', $checked);
-												?>
-												<span><strong><?php echo Kohana::lang('ui_main.alerts_mobile_phone'); ?></strong><br /><?php echo Kohana::lang('ui_main.alerts_enter_mobile'); ?></span>
-											</label>
-											<span><?php print form::input('alert_mobile', $form['alert_mobile'], ' class="text long"'); ?></span>
-										</div>
-										<div class="box">
-											<label>
-												<?php
 													if ($form['alert_email_yes'] == 1) {
 														$checked = true;
 													}

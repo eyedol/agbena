@@ -58,7 +58,7 @@
 				}
 												
 				echo "		<div class=\"report_details report_col2\">";
-				echo "			<h3><a href=\"" . url::base() . "reports/view/" . $job_id . "\">" . $job_title . "</a></h3>";
+				echo "			<h3><a href=\"" . url::base() . "jobs/view/" . $job_id . "\">" . $job_title . "</a></h3>";
 				echo $job_description;
 				echo "		</div>";
 				echo "		<div class=\"report_date report_col3\">";

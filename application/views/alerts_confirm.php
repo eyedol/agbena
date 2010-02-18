@@ -19,41 +19,7 @@
 						<!-- start alerts block -->
 						<div class="big-block">
 							<h1>Get Alerts</h1>
-							
-							<!-- Mobile Alert -->
-							<div class="green-box">
-								<?php
-								if ($alert_mobile)
-								{
-									echo "<h3>".Kohana::lang('alerts.mobile_ok_head')."</h3>";
-								}
-								?>
-								<div class="alert_response">
-									<?php 
-									if ($alert_mobile)
-									{
-										echo Kohana::lang('alerts.mobile_alert_request_created')."<u><strong>".
-											$alert_mobile."</strong></u>.".
-											Kohana::lang('alerts.verify_code');
-									}
-									?>
-									<div class="alert_confirm">
-										<div class="label">
-											<u><?php echo Kohana::lang('alerts.mobile_code'); ?></u>
-										</div>
-										<?php 
-										print form::open('/alerts/verify');
-										print "Verification Code:<BR>".form::input('alert_code', '', ' class="text"')."<BR>";
-										print "Mobile Phone:<BR>".form::input('alert_mobile', $alert_mobile, ' class="text"')."<BR>";
-										print form::submit('button', 'Confirm My Alert Request', ' class="btn_submit"');
-										print form::close();
-										?>
-									</div>
-								</div>
-							</div>
-							<!-- / Mobile Alert -->
-							
-							
+													
 							<!-- Email Alert -->
 							<div class="green-box">
 								<?php
