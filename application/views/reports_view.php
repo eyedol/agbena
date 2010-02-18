@@ -68,8 +68,8 @@
 							<div class="location">
 								<div class="incident-notation clearingfix">
 									<ul>
-										<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Incident</li>
-										<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Nearby Incident</li>
+										<li><img align="absmiddle" alt="Profile" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/>Profile</li>
+										<li><img align="absmiddle" alt="Nearby Profile" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Nearby Profile</li>
 									</ul>
 								</div>
 								<div class="report-map">
@@ -81,7 +81,7 @@
 				</div>
 		
 				<div class="report-description">
-					<h3>Incident Report Description</h3>
+					<h3>Profile Description</h3>
 						<div class="content">
 							<?php echo $incident_description; ?>
 							<div class="credibility">
@@ -94,7 +94,7 @@
 						</div>
 					<div class="orig-report">
 						<div class="discussion">
-							<h5>ADDITIONAL REPORTS AND DISCUSSION&nbsp;&nbsp;&nbsp;(<a href="#comments">Add</a>)</h5>
+							<h5>ADDITIONAL COMMENTS FOR THIS PROFILE &nbsp;&nbsp;&nbsp;(<a href="#comments">Add</a>)</h5>
 							<?php
 								foreach($incident_comments as $comment)
 								{
@@ -175,7 +175,7 @@
 					}?>
 
 					<div class="report-description">
-						<h3>Incident Report(s)</h3>
+						<h3>Profile(s)</h3>
 						<table>
 							<tr class="title">
 								<th class="w-01">TITLE</th>

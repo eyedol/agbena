@@ -20,7 +20,7 @@
 		<input type="hidden" name="latitude" id="latitude" value="<?php echo $form['latitude']; ?>">
 		<input type="hidden" name="longitude" id="longitude" value="<?php echo $form['longitude']; ?>">
 		<div class="big-block">
-			<h1><?php echo Kohana::lang('ui_main.reports_submit_new'); ?></h1>
+			<h1><?php echo Kohana::lang('ui_main.jobs_submit_new'); ?></h1>
 			<?php
 			if ($form_error) {
 			?>

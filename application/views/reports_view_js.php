@@ -18,21 +18,7 @@
 		var map;
 		jQuery(function() {
 			var moved=false;
-
-			// Photoslider
-			photos = ["<?php echo join($incident_photos, '","'); ?> "];
-			FOTO.Slider.baseURL = "<?php echo url::base() . 'media/uploads/'; ?>";
-			FOTO.Slider.bucket = {  
-         		'default': {}  
-     		}; 
-     		for(var i = 0; i<photos.length; i++) {
-     			FOTO.Slider.bucket['default'][i] = {'main': photos[i], 
-     			                                    'thumb': photos[i].replace('.jpg', '_t.jpg')};
-     		}
-     		FOTO.Slider.reload('default');  
-			FOTO.Slider.preloadImages('default');
-			
-	
+				
 			/*
 			- Initialize Map
 			- Uses Spherical Mercator Projection			

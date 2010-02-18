@@ -90,14 +90,14 @@ class Reports_Controller extends Main_Controller {
 			if($total_pages > 1) { // If we want to show pagination
 				$this->template->content->pagination_stats = '(Showing '
                      .$current_page.' of '.$total_pages
-                     .' pages of '.$pagination->total_items.' report'.$plural.')';
+                     .' pages of '.$pagination->total_items.' profile'.$plural.')';
 				
                 $this->template->content->pagination = $pagination;
 			} else { // If we don't want to show pagination
-				$this->template->content->pagination_stats = '('.$pagination->total_items.' report'.$plural.')';
+				$this->template->content->pagination_stats = '('.$pagination->total_items.' profile'.$plural.')';
 			}
 		} else {
-			$this->template->content->pagination_stats = '('.$pagination->total_items.' report'.$plural.')';
+			$this->template->content->pagination_stats = '('.$pagination->total_items.' profile'.$plural.')';
 		}
 		
 		$icon_html = array();
@@ -106,7 +106,7 @@ class Reports_Controller extends Main_Controller {
 		$icon_html[3] = ""; //audio
 		$icon_html[4] = ""; //news
 		$icon_html[5] = ""; //podcast
-		
+		$incident_photo = array();
 		//Populate media icon array
 		$this->template->content->media_icons = array();
 		foreach($incidents as $incident) {
@@ -116,13 +116,9 @@ class Reports_Controller extends Main_Controller {
 				$medias = ORM::factory('media')
                           ->where('incident_id', $incident_id)->find_all();
 				
-				//Modifying a tmp var prevents Kohona from throwing an error
-				$tmp = $this->template->content->media_icons;
-				$tmp[$incident_id] = '';
-				
 				foreach($medias as $media) {
-					$tmp[$incident_id] .= $icon_html[$media->media_type];
-					$this->template->content->media_icons = $tmp;
+					$incident_photo[] = $media->media_thumb;
+					$this->template->content->media_icons =$incident_photo;
 				}
 			}
 		}
@@ -423,36 +419,7 @@ class Reports_Controller extends Main_Controller {
 					$incident_category->save();
 				}
 				
-				// STEP 4: SAVE MEDIA
-				// a. News
-				foreach($post->incident_news as $item)
-				{
-					if(!empty($item))
-					{
-						$news = new Media_Model();
-						$news->location_id = $location->id;
-						$news->incident_id = $incident->id;
-						$news->media_type = 4;		// News
-						$news->media_link = $item;
-						$news->media_date = date("Y-m-d H:i:s",time());
-						$news->save();
-					}
-				}
 				
-				// b. Video
-				foreach($post->incident_video as $item)
-				{
-					if(!empty($item))
-					{
-						$video = new Media_Model();
-						$video->location_id = $location->id;
-						$video->incident_id = $incident->id;
-						$video->media_type = 2;		// Video
-						$video->media_link = $item;
-						$video->media_date = date("Y-m-d H:i:s",time());
-						$video->save();
-					}
-				}
 				
 				// c. Photos
 				$filenames = upload::save('incident_photo');
@@ -485,38 +452,7 @@ class Reports_Controller extends Main_Controller {
 					$i++;
                                 }
 
-                                 // d. Docs
-				$docnames = upload::save('incident_doc','',Kohana::config('upload.directory',TRUE). 'docs/');
-                                $i = 1;
-                                $extensions = array('.doc' => 1, '.pdf' => 2, '.xml'=> 3, '.odt' => 4 );
-				foreach ($docnames as $docname) {
-					$new_docname = $incident->id . "_" . $i . "_" . time().strrchr($docname,'.');
-					
-					// Resize original file... make sure its max 408px wide
-					/*Image::factory($filename)->resize(408,248,Image::AUTO)
-						->save(Kohana::config('upload.directory', TRUE) . $new_filename . ".jpg");
-					
-					// Create thumbnail
-					Image::factory($filename)->resize(70,41,Image::HEIGHT)
-                                            ->save(Kohana::config('upload.directory', TRUE) . $new_filename . "_t.jpg");*/
-
-                                        //upload::save($docname,$new_docname,Kohana::config('upload.directory',TRUE). 'docs/');
-					
-					// Remove the temporary file
-                                        //rename file
-                                        rename($docname,Kohana::config('upload.directory',TRUE). 'docs/'.$new_docname);
-                                        //unlink($docname);
-					
-					// Save to DB
-					$docs = new Doc_Model();
-					$docs->location_id = $location->id;
-					$docs->incident_id = $incident->id;
-					$docs->doc_type = $extensions[strrchr($docname,'.')]; // Images
-					$docs->doc_link = $new_docname;
-					$docs->doc_date = date("Y-m-d H:i:s",time());
-                                        $docs->save();
-					$i++;
-				} 
+                 
 
                                 // STEP 7: SAVE CUSTOM FORM FIELDS
 				if(isset($post->custom_field))

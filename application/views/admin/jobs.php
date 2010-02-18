@@ -175,7 +175,7 @@ if ($form_saved) {
 						<p><?php echo $job_description; ?>... <a href="<?php echo url::base() . 'admin/reports/edit/' . $job_id; ?>" class="more">more</a></p>
 					</div>
 					<ul class="info">
-						<li class="none-separator">Location: <strong><?php echo $job_location; ?></strong>, <strong><?php echo $countries[Kohana::config('settings.default_country')]; ?></strong></li>
+						<li class="none-separator">Location: <strong><?php echo $job_location; ?></strong></li>
 						<li>Submitted by <strong><?php echo $submit_by; ?></strong> via <strong><?php echo $submit_mode; ?></strong></li>
 					</ul>
 					<ul class="links">

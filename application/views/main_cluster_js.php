@@ -604,7 +604,7 @@
 			if (cluster)
 			{
 				var content = "<div class=\"infowindow\">";
-				content = content + "<h2>" + event.feature.cluster.length + " Event[s]...</h2>\n";
+				content = content + "<h2>" + event.feature.cluster.length + " Profile[s]...</h2>\n";
 				content = content + "<div class=\"infowindow_list\"><ul>";
 				for(var i=0; i<Math.min(event.feature.cluster.length, 5); ++i) {
 					content = content + "\n<li>" + event.feature.cluster[i].data.name + "</li>";
