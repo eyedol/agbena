@@ -215,7 +215,7 @@ class Manage_Controller extends Admin_Controller
 		$form = array
 	    (
 			'action' => '',
-			'j_category_id'      => '',
+			'job_category_id'      => '',
 			'parent_id'      => '',
 			'job_category_title'      => '',
 	        'job_category_description'    => '',
@@ -247,13 +247,13 @@ class Manage_Controller extends Admin_Controller
 				$post->add_rules('job_category_color','required', 'length[6,6]');
 				$post->add_rules('job_category_image', 'upload::valid', 
 					'upload::type[gif,jpg,png]', 'upload::size[50K]');
-				$post->add_callbacks('parent_id', array($this,'parent_id_chk'));
+				$post->add_callbacks('parent_id', array($this,'parent_id_chk_jcats'));
 			}
 			
 			// Test to see if things passed the rule checks
 	        if ($post->validate())
 	        {
-				$category_id = $post->category_id;
+				$category_id = $post->job_category_id;
 				$category = new J_Category_Model($category_id);
 				
 				if( $post->action == 'd' )
@@ -301,7 +301,7 @@ class Manage_Controller extends Admin_Controller
 					$category->save();
 					
 					// Upload Image/Icon
-					$filename = upload::save('j_category_image');
+					$filename = upload::save('job_category_image');
 					if ($filename)
 					{
 						$new_filename = "category_".$category->id."_".time();
@@ -1319,6 +1319,37 @@ class Manage_Controller extends Admin_Controller
 			return;
 		
 		$parent_exists = ORM::factory('category')
+			->where('id', $parent_id)
+			->find();
+		
+		if (!$parent_exists->loaded)
+		{ // Parent Category Doesn't Exist
+			$post->add_error( 'parent_id', 'exists');
+		}
+		
+		if (!empty($category_id) && $category_id == $parent_id)
+		{ // Category ID and Parent ID can't be the same!
+			$post->add_error( 'parent_id', 'same');
+		}
+	}
+	
+	/**
+	 * Checks if parent_id for this job category exists
+     * @param Validation $post $_POST variable with validation rules
+	 */
+	public function parent_id_chk_jcats(Validation $post)
+	{
+		// If add->rules validation found any errors, get me out of here!
+		if (array_key_exists('parent_id', $post->errors()))
+			return;
+		
+		$category_id = $post->job_category_id;
+		$parent_id = $post->parent_id;
+		// This is a parent category - exit
+		if ($parent_id == 0)
+			return;
+		
+		$parent_exists = ORM::factory('j_category')
 			->where('id', $parent_id)
 			->find();
 		

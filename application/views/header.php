@@ -102,9 +102,7 @@
 	<div id="language-switch">
     	<h3>Select Language</h3>
         <p>
-        	<a href="?l=cp_HT" id="cp_HT" <?php if(Kohana::config('locale.language') == 'cp_HT' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/ht.png" align="left" /></span>Kreyol (CP)</a>
          	<a href="?l=fr_FR" id="fr_FR" <?php if(Kohana::config('locale.language') == 'fr_FR' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/fr.png" align="left" /></span>Français (FR)</a>
-        	<a href="?l=es_AR" id="es_AR" <?php if(Kohana::config('locale.language') == 'es_AR' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/es.png" align="left" /></span>Español (AR)</a>
           	<a href="?l=en_US" id="en_US" <?php if(Kohana::config('locale.language') == 'en_US' ) echo 'class="active"' ?> ><span><img src="<?php echo url::base() ?>themes/agbena/us.png" align="left" /></span>English (US)</a>
        	</p>
                                 
@@ -162,10 +160,10 @@
 						<li><a href="<?php echo url::base() . "main" ?>" <?php if ($this_page == 'home') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.home'); ?></a></li>
 						<li><a href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>							
 						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.forums'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.chat'); ?></a></li>
-						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.shop'); ?></a></li>
+						<li><a href="http://blogs.agbena.com"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
+						<li><a href="http://forums.agbena.com"><?php echo Kohana::lang('ui_main.forums'); ?></a></li>
+						<li><a href="<?php echo url::base(). "chat"?>"><?php echo Kohana::lang('ui_main.chat'); ?></a></li>
+						
 						<li><a href="<?php echo url::base() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
 						<?php
 					

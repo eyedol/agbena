@@ -94,7 +94,7 @@
 						</div>
 					<div class="orig-report">
 						<div class="discussion">
-							<h5>ADDITIONAL COMMENTS FOR THIS PROFILE &nbsp;&nbsp;&nbsp;(<a href="#comments">Add</a>)</h5>
+							<h5>ADDITIONAL COMMENTS FOR THIS PROFILE &nbsp;&nbsp;&nbsp;(<a href="#comments">Add</a>) &nbsp;&nbsp; OR &nbsp;&nbsp; WANTS TO CONNECT? (<a href="<?php echo url::base()."reports/connect/$incident_id";?>">Get in touch &raquo;</a>)</h5>
 							<?php
 								foreach($incident_comments as $comment)
 								{

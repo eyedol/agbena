@@ -188,8 +188,8 @@
 					<div class="tab">
 						<?php print form::open(NULL,array('enctype' => 'multipart/form-data', 
 							'id' => 'catMain', 'name' => 'catMain')); ?>
-						<input type="hidden" id="category_id" 
-							name="category_id" value="" />
+						<input type="hidden" id="job_category_id" 
+							name="job_category_id" value="" />
 						<input type="hidden" name="action" 
 							id="action" value="a"/>
 						<div class="tab_form_item">
@@ -205,12 +205,12 @@
 							<?php print form::input('job_category_color', '', ' class="text"'); ?>
 							<script type="text/javascript" charset="utf-8">
 								$(document).ready(function() {
-									$('#category_color').ColorPicker({
+									$('#job_category_color').ColorPicker({
 										onSubmit: function(hsb, hex, rgb) {
-											$('#category_color').val(hex);
+											$('#job_category_color').val(hex);
 										},
 										onChange: function(hsb, hex, rgb) {
-											$('#category_color').val(hex);
+											$('#job_category_color').val(hex);
 										},
 										onBeforeShow: function () {
 											$(this).ColorPickerSetColor(this.value);

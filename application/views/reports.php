@@ -62,9 +62,12 @@
 									echo "<div class=\"report_row1\">";
 									echo "	<div class=\"report_thumb report_col1\">";
 									echo "			&nbsp;&nbsp;";
-									if(isset($media_icons[0])){
-                        				echo "<img src=\"" . url::base() . "media/uploads/" . $media_icons[0] . "\" >";
+									
+									if(isset($media_icons)){
+                        				echo "<img src=\"" . url::base() . "media/uploads/" . $media_icons . "\" >";
                         				
+									} else if(empty($media_icons)) {
+										echo "<img src=\"" . url::base() . "media/img/face.png\" >";
 									}
 									echo "		</div>";
 									echo "		<div class=\"report_details report_col2\">";

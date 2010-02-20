@@ -669,6 +669,7 @@ class Jobs_Controller extends Jobsmain_Controller {
         $this->template->content->errors = $errors;
         $this->template->content->form_error = $form_error;
         $this->template->content->form_sent = $form_sent;
+        $this->template->content->previous_page = url::base()."jobs/view/$id";
 		$this->template->content->captcha = $captcha;
 	}
 		

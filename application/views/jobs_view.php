@@ -82,7 +82,7 @@
 	</div><!-- end content -->
 	<div class="orig-report">
 		<div class="discussion">
-			<h5>ANY COMMENT? (<a href="#comments">Add</a>)&nbsp;&nbsp; OR &nbsp;&nbsp; INTRESTED? (<a href="<?php echo url::base()."jobs/apply/$job_id";?>">Apply now</a>)</h5>
+			<h5>ANY COMMENT? (<a href="#comments">Add</a>)&nbsp;&nbsp; OR &nbsp;&nbsp; INTRESTED? (<a href="<?php echo url::base()."jobs/apply/$job_id";?>">Apply now &raquo;</a>)</h5>
 			<?php
 			foreach($job_comments as $comment)
 			{

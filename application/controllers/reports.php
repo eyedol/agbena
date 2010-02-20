@@ -108,17 +108,23 @@ class Reports_Controller extends Main_Controller {
 		$icon_html[5] = ""; //podcast
 		$incident_photo = array();
 		//Populate media icon array
-		$this->template->content->media_icons = array();
+		$this->template->content->media_icons = "";
+		
 		foreach($incidents as $incident) {
+			
 			$incident_id = $incident->id;
+			
 			if(ORM::factory('media')
                ->where('incident_id', $incident_id)->count_all() > 0) {
 				$medias = ORM::factory('media')
                           ->where('incident_id', $incident_id)->find_all();
-				
+				//print $incident_id;exit;
 				foreach($medias as $media) {
-					$incident_photo[] = $media->media_thumb;
-					$this->template->content->media_icons =$incident_photo;
+					
+					//$incident_photo[] = $media->media_thumb;
+					
+					$this->template->content->media_icons = $media->media_thumb; 
+					//$incident_photo;
 				}
 			}
 		}
@@ -827,6 +833,91 @@ class Reports_Controller extends Main_Controller {
 	}
 	
 	/**
+	 * Apply job page.
+	 */
+	public function connect( $id = false ) {
+		$this->template->header->this_page = 'job_apply';
+		$this->template->content = new View('job_apply');
+		
+		if ( !$id )
+		{
+			url::redirect('main');
+		}
+		else
+		{
+			$job = ORM::factory('incident', $id);
+			
+			$person = ORM::factory('incident_person')->where('incident_id',$id)->find();
+			
+			if ( $job->id == 0 )	// Not Found
+			{
+				url::redirect('main');
+			}
+		
+			// Setup and initialize form field names
+        	$form = array (
+				'contact_name' => '',
+				'contact_email' => '',
+				'contact_phone' => '',
+				'contact_subject' => '',			
+				'contact_message' => '',
+				'captcha' => ''
+				);
+
+        	// Copy the form as errors, so the errors will be stored with keys
+        	// corresponding to the form field names
+			$captcha = Captcha::factory();
+        	$errors = $form;
+        	$form_error = FALSE;
+        	$form_sent = FALSE;
+		
+			// Check, has the form been submitted, if so, setup validation
+			if ($_POST)
+			{
+				// Instantiate Validation, use $post, so we don't overwrite $_POST fields with our own things
+				$post = Validation::factory($_POST);
+
+				// Add some filters
+				$post->pre_filter('trim', TRUE);
+	
+				// Add some rules, the input field, followed by a list of checks, carried out in order
+				$post->add_rules('contact_name', 'required', 'length[3,100]');
+				$post->add_rules('contact_email', 'required','email', 'length[4,100]');
+				$post->add_rules('contact_subject', 'required', 'length[3,100]');
+				$post->add_rules('contact_message', 'required');
+				$post->add_rules('captcha', 'required', 'Captcha::valid');
+			
+				// Test to see if things passed the rule checks
+				if ($post->validate())
+				{
+					$form_sent = $this->_send_application($post, $person->person_email,$id);
+				
+            	}
+            	// No! We have validation errors, we need to show the form again, with the errors
+            	else
+            	{
+                	// repopulate the form fields
+                	$form = arr::overwrite($form, $post->as_array());
+
+                	// populate the error fields, if any
+                	$errors = arr::overwrite($errors, $post->errors('contact'));
+                	$form_error = TRUE;
+            	}
+			}
+        }
+		
+		$this->template->content->job_title = $job->incident_title;
+		$this->template->content->job_description = nl2br($job->incident_description);
+		$this->template->content->job_id = $id;	
+        $this->template->content->form = $form;
+        $this->template->content->errors = $errors;
+        $this->template->content->form_error = $form_error;
+        $this->template->content->form_sent = $form_sent;
+         $this->template->content->previous_page = url::base()."reports/view/$id";
+		$this->template->content->captcha = $captcha;
+	}
+	
+	/**
 	 * Report Thanks Page
 	 */
 	function thanks()
@@ -1127,10 +1218,31 @@ class Reports_Controller extends Main_Controller {
 		return true;
     }
 
-
-	/**
-	 * Ajax call to update Incident Reporting Form
-	 */
+	private function _send_application($post,$person_email,$id) {
+		
+		$site_email = Kohana::config('settings.site_email');
+		
+		$message = "Sender: " . $post->contact_name . "<br />";
+		$message .= "Email: " . $post->contact_email . "<br />";
+		$message .= "Phone: " . $post->contact_phone . "<br /><br />";
+		$message .= "Message: \n" . $post->contact_message . "<br /><br /><br />";
+		$message .= "This is a follow up to your profile below<br />";
+		$message .= url::base()."reports/view/$id <br /><br />";
+		$message .= "~~~~~~~~~~~~~~~~~~~~~~<br />";
+		$to = $person_email;
+		$from = $post->contact_email;
+		$subject = $post->contact_subject;
+		
+		//email details
+		if( email::send( $to, $from, $subject, $message, TRUE ) == 1 )
+		{
+			return TRUE;
+		}
+		else 
+		{
+			return FALSE;
+		}
+	}
 	/*public function switch_form()
     {
 		$this->template = "";
