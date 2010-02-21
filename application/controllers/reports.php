@@ -71,6 +71,8 @@ class Reports_Controller extends Main_Controller {
 				->orderby('incident_date', 'desc')
 				->find_all( (int) Kohana::config('settings.items_per_page'), 
 					$pagination->sql_offset);
+					
+		//$incidents = ORM::factory('incident');
 		
 		$this->template->content->incidents = $incidents;
 		
@@ -106,25 +108,23 @@ class Reports_Controller extends Main_Controller {
 		$icon_html[3] = ""; //audio
 		$icon_html[4] = ""; //news
 		$icon_html[5] = ""; //podcast
-		$incident_photo = array();
-		//Populate media icon array
-		$this->template->content->media_icons = "";
 		
+		//Populate media icon array
+		$this->template->content->media_icons = array();
 		foreach($incidents as $incident) {
-			
 			$incident_id = $incident->id;
-			
 			if(ORM::factory('media')
                ->where('incident_id', $incident_id)->count_all() > 0) {
 				$medias = ORM::factory('media')
                           ->where('incident_id', $incident_id)->find_all();
-				//print $incident_id;exit;
+				
+				//Modifying a tmp var prevents Kohona from throwing an error
+				$tmp = $this->template->content->media_icons;
+				$tmp[$incident_id] = '';
+				
 				foreach($medias as $media) {
-					
-					//$incident_photo[] = $media->media_thumb;
-					
-					$this->template->content->media_icons = $media->media_thumb; 
-					//$incident_photo;
+					$tmp[$incident_id] .= $media->media_thumb;
+					$this->template->content->media_icons = $tmp;
 				}
 			}
 		}
