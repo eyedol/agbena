@@ -184,7 +184,7 @@
 	 								if ($total_items == 0)
 									{
 									?>
-									<tr><td colspan="3">No Reports In The System</td></tr>
+									<tr><td colspan="3">No Profiles In The System</td></tr>
 
 									<?php
 									}

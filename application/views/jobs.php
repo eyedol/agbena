@@ -18,7 +18,7 @@
 					<div class="content-bg">
 						<!-- start reports block -->
 						<div class="big-block">
-							<h1>Profiles <?php echo ($pagination_stats) ?></h1>
+							<h1>Jobs <?php echo ($pagination_stats) ?></h1>
 								
 							<div class="report_rowtitle">
 								<div class="report_col2">

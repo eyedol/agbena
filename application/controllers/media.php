@@ -59,7 +59,9 @@ class Media_Controller extends Controller {
 		
 		$mtime = filemtime($file);
 		
-		$file_data = file_get_contents($file);
+		if(!empty($file)){ 
+			$file_data = file_get_contents($file);
+		}
 		
 		if ($ext == "css")
 		{ // Compress CSS data

@@ -37,26 +37,34 @@
 								</div>
 								<?php
 									}
-								?>								
+								?>		
+								<div id="help_view">						
 								<ul>
 									<li>
 										<strong>ABOUT</strong>
 										<p><?php echo $organization_description; ?></p>
 									</li>
+									<?php if( !empty($organization_website ) ) { ?>
 									<li>
 										<strong>WEBSITE</strong>
 										<p><?php echo $organization_website; ?></p>
 									</li>
+									<?php } ?>
+									<?php if( !empty($organization_phone1 ) ) { ?>
 									<li>
 										<strong>Phone</strong>
 										<p><?php echo $organization_phone1; ?></p>
 									</li>
+									<?php } ?>
+									<?php if( !empty($organization_phone2 ) ) { ?>
 									<li>
 										<strong>Phone</strong>
 										<p><?php echo $organization_phone2; ?></p>
 									</li>
+									<?php } ?>
 									<?php if (!empty($organization_email)) { ?>
 									<li>
+									</div>
 										<div id="contact" class="org_contact">
 											<h3>Contact Us:</h3>
 											<div class="org_contact_row">

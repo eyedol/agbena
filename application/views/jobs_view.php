@@ -56,20 +56,7 @@
 				</ul>
 					
 			</div><!-- end report-details-->
-			
-			<!-- start location -->
-			<div class="location">
-				<div class="incident-notation clearingfix"> <!-- start location -->
-					<ul>
-						<li><img align="absmiddle" alt="Incident" src="<?php echo url::base(); ?>media/img/incident-pointer.jpg"/> Job</li>
-						<li><img align="absmiddle" alt="Nearby Incident" src="<?php echo url::base(); ?>media/img/nearby-incident-pointer.jpg"/> Nearby Job</li>
-					</ul>
-				</div> <!-- end incident-notation clearingfix"> -->
-				<div class="report-map"> <!-- start report-map -->
-					<div class="map-holder" id="map"></div>
-				</div><!-- end report-map -->
-			</div> <!-- end location -->
-			
+				
 		</div><!-- end reports -->
 		
 	</div><!-- end mainmiddle -->
@@ -153,4 +140,6 @@
 			<?php print form::close(); ?>
 		</div>
 	</div>
+</div>
+</div>
 </div>

@@ -123,7 +123,7 @@
 				
 						<!-- left content block -->
 						<div class="content-block-left">
-							<h5><?php echo Kohana::lang('ui_main.incidents_listed'); ?></h5>
+							<h5><?php echo Kohana::lang('ui_main.jobs_listed_listed'); ?></h5>
 							<table class="table-list">
 								<thead>
 									<tr>

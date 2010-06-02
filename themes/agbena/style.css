@@ -178,6 +178,17 @@ div#mainmenu a.active{
     text-decoration: underline;
 }
 
+/* help view page */
+#help_view ul {
+	margin : 0;
+	padding: 0;
+}
+
+#help_view li {
+	list-style : none;
+	padding : 10px 10px;
+}
+
 /* report */
 .report_left{
 	float:left;

@@ -23,9 +23,10 @@
 
 <p>There is a link to a web-based chat available below which allow access to this same chat room without needing an IRC client. To enter the room, please give yourself a nickname and specify the <strong>#gh-dev</strong> channel then click CONNECT to join the chatroom.<br /><br /><br /></p>
 
-<p>You can also join GDC mailing list for email conversation at <a href="http://groups.google.com/group/ghanadevelopers">http://groups.google.com/group/ghanadevelopers</a><br /><br /><br /></p>
+<p>Connect to the chatroom here: <a href="http://webchat.freenode.net">http://webchat.freenode.net</a><br /><br /><br /></p>
 
-<p>Connect to the chatroom here: <a href="http://webchat.freenode.net">http://webchat.freenode.net</a><br /><br /><br /></p>				
+<p>You can also join GDC mailing list for email conversation at <a href="http://groups.google.com/group/ghanadevelopers">http://groups.google.com/group/ghanadevelopers</a><br /><br /><br /></p>
+				
 		</div>
 		<!-- end reports block -->
 	</div>

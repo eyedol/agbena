@@ -117,7 +117,7 @@
 			<div id="searchbox">
 				<!-- languages -->
 				<div class="language-box">
-                     <strong>Search Reports Here:</strong> 
+                     <strong>Search Profiles Here:</strong> 
 				</div>
 				<!-- / languages -->
 				
@@ -161,12 +161,18 @@
 						<li><a href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>							
 						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li>
 						<li><a href="http://blogs.agbena.com"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
-						<li><a href="http://forums.agbena.com"><?php echo Kohana::lang('ui_main.forums'); ?></a></li>
 						<li><a href="<?php echo url::base(). "chat"?>"><?php echo Kohana::lang('ui_main.chat'); ?></a></li>
+						<li><a href="<?php echo url::base() . "help" ?>" <?php if ($this_page == 'help') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.groups'); ?></a></li>
 						
-						<li><a href="<?php echo url::base() . "alerts" ?>" <?php if ($this_page == 'alerts') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.alerts'); ?></a></li>
+					</ul>
+
+				</div>
+				<!-- / mainmenu -->
+				<div class="submenu">
+					<ul class="clearingfix">
+						<li><a class="item1" href="<?php echo url::base() . "jobs" ?>" <?php if ($this_page == 'jobs') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.view_job'); ?></a></li>							
+						<li><a href="<?php echo url::base() . "jobs/submit" ?>" <?php if ($this_page == 'jobs_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit_job'); ?></a></li>
 						<?php
-					
 						// Custom Pages
 						foreach ($pages as $page)
 						{
@@ -174,15 +180,6 @@
 							echo "<li><a href=\"".url::base()."page/index/".$page->id."\" ".$this_active.">".$page->page_tab."</a></li>";
 						}
 						?>
-					</ul>
-
-				</div>
-				<!-- / mainmenu -->
-				<div class="submenu">
-					<ul class="clearingfix">
-						<li><a class="item1" href="<?php echo url::base() . "jobsmain" ?>" <?php if ($this_page == 'jobsmain') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.jobs_main'); ?></a></li>
-						<li><a class="item1" href="<?php echo url::base() . "jobs" ?>" <?php if ($this_page == 'jobs') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.view_job'); ?></a></li>							
-						<li><a href="<?php echo url::base() . "jobs/submit" ?>" <?php if ($this_page == 'jobs_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit_job'); ?></a></li>
 						<?php
 						// Contact Page
 						if ($site_contact_page)
