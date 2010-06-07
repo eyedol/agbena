@@ -137,7 +137,7 @@
 		
 			<!-- logo -->
 			<div id="logo">
-				<h1><?php echo $site_name; ?></h1>
+				<h1><img src="<?php echo url::base().'themes/agbena/logo.png'; ?>" /></h1>
 				<span><?php echo $site_tagline; ?></span>
 			</div>
 			<!-- / logo -->
@@ -161,6 +161,7 @@
 						<li><a href="<?php echo url::base() . "reports" ?>" <?php if ($this_page == 'reports') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.reports'); ?></a></li>							
 						<li><a href="<?php echo url::base() . "reports/submit" ?>" <?php if ($this_page == 'reports_submit') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.submit'); ?></a></li>
 						<li><a href="http://blogs.agbena.com"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
+						<li><a href="http://shop.agbena.com"><?php echo Kohana::lang('ui_main.shop'); ?></a></li>
 						<li><a href="<?php echo url::base(). "chat"?>"><?php echo Kohana::lang('ui_main.chat'); ?></a></li>
 						<li><a href="<?php echo url::base() . "help" ?>" <?php if ($this_page == 'help') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.groups'); ?></a></li>
 						
