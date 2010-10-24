@@ -163,6 +163,7 @@
 						<li><a href="http://blogs.agbena.com"><?php echo Kohana::lang('ui_main.blog'); ?></a></li>
 						<li><a href="http://shop.agbena.com"><?php echo Kohana::lang('ui_main.shop'); ?></a></li>
 						<li><a href="<?php echo url::base(). "chat"?>"><?php echo Kohana::lang('ui_main.chat'); ?></a></li>
+                        <li><a href="<?php echo url::base(). "calendar"?>"><?php echo Kohana::lang('ui_main.calendar'); ?></a></li>
 						<li><a href="<?php echo url::base() . "help" ?>" <?php if ($this_page == 'help') echo 'class="active"'; ?>><?php echo Kohana::lang('ui_main.groups'); ?></a></li>
 						
 					</ul>

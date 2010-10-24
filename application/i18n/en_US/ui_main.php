@@ -21,6 +21,7 @@ $lang = array(
 	'forums' => 'Forum',
 	'shop' => 'Shop',
 	'chat' => 'Chat',
+    'calendar' => 'Calendar',
 	'help' => 'How to Help',
 	'groups' => 'Tech Groups',
 	'report_an_incident' => 'Send a Job',
